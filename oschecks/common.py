@@ -45,6 +45,20 @@ class LimitCommand (CheckCommand):
         return p
 
 
+class MetricCommand(CheckCommand):
+    default_metric_warning = 70
+    default_metric_critical = 90
+
+    def get_parser(self, prog_name):
+        p = super(MetricCommand, self).get_parser(prog_name)
+        g = p.add_argument_group('Metric Options')
+        g.add_argument('--metric-warning', '-v', dest='metric_warning',
+                       type=int, default=self.default_metric_warning)
+        g.add_argument('--metric-critical', '-k', dest='metric_critical',
+                       type=int, default=self.default_metric_critical)
+        return p
+
+
 class TimeoutCommand (CheckCommand):
     default_timeout_warning = 5
     default_timeout_critical = 10
@@ -53,9 +67,9 @@ class TimeoutCommand (CheckCommand):
         p = super(TimeoutCommand, self).get_parser(prog_name)
         g = p.add_argument_group('Timeout Options')
 
-        g.add_argument('--warning', '-w', dest='timeout_warning',
+        g.add_argument('--timeout-warning', '-w', dest='timeout_warning',
                        type=int, default=self.default_timeout_warning)
-        g.add_argument('--critical', '-c', dest='timeout_critical',
+        g.add_argument('--timeout-critical', '-c', dest='timeout_critical',
                        type=int, default=self.default_timeout_critical)
 
         return p

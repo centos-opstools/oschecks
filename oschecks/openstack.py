@@ -80,10 +80,12 @@ class OpenstackAuthCommand(common.CheckCommand):
 
 class OpenstackCommand(OpenstackAuthCommand,
                        common.TimeoutCommand,
-                       common.LimitCommand):
+                       common.LimitCommand,
+                       common.MetricCommand):
     '''This is the base class used by most of the OpenStack API
     checks.  It includes the Openstack authentication options, the
-    timing options (-w/--warning and -c/--critical), and the limit
+    timing options (-w/--timeout-warning and -c/--timeout-critical),
+    metric options (-v/--metric-warning and -k/--metric-critical) and the limit
     options (-l/--limit).'''
 
     pass
